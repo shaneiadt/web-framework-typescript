@@ -117,9 +117,71 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"src/index.ts":[function(require,module,exports) {
-console.log('sup bra!');
-},{}],"../../../AppData/Roaming/nvm/v10.16.3/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+})({"src/models/User.ts":[function(require,module,exports) {
+"use strict";
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var User =
+/** @class */
+function () {
+  function User(data) {
+    this.data = data;
+  }
+
+  User.prototype.get = function (propName) {
+    return this.data[propName];
+  };
+
+  User.prototype.set = function (update) {
+    this.data = __assign(__assign({}, this.data), update);
+  };
+
+  User.prototype.on = function (eventName, callback) {};
+
+  User.prototype.trigger = function (eventName) {};
+
+  return User;
+}();
+
+exports.User = User;
+},{}],"src/index.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var User_1 = require("./models/User");
+
+var user = new User_1.User({
+  name: 'Donny',
+  age: 20
+});
+user.set({
+  name: 'Shane'
+});
+console.log(user.get('age'));
+console.log(user.get('name'));
+},{"./models/User":"src/models/User.ts"}],"../../../AppData/Roaming/nvm/v10.16.3/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -147,7 +209,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56822" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57712" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
