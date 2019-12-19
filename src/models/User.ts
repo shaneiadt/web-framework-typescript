@@ -1,6 +1,9 @@
+import axios, { AxiosResponse } from 'axios';
+
 interface UserProps {
-  name?: string,
-  age?: number
+  id?: number;
+  name?: string;
+  age?: number;
 }
 
 type Callback = () => void;
@@ -32,8 +35,37 @@ export class User {
   }
 
   trigger(eventName: string): void {
-    if (this.events[eventName]) {
-      this.events[eventName].forEach(event => event());
+    const handlers = this.events[eventName];
+
+    if (!handlers || handlers.length === 0) return;
+
+    handlers.forEach(callback => callback());
+  }
+
+  fetch(): void {
+    axios.get(`http://localhost:3000/users/${this.get('id')}`)
+      .then((res: AxiosResponse): void => {
+        console.log(res);
+        this.set(res.data);
+      });
+  }
+
+  save(): void {
+    const id = this.get('id');
+    const data = { ...this.data };
+
+    if (id) {
+      axios.patch(`http://localhost:3000/users/${id}`, data)
+        .then((res: AxiosResponse): void => {
+          console.log('UPDATED - SAVED', res);
+          // this.set(res.data);
+        });
+    } else {
+      axios.post(`http://localhost:3000/users`, data)
+        .then((res: AxiosResponse): void => {
+          console.log('POST - SAVED', res);
+          // this.set(res.data);
+        });
     }
   }
 }

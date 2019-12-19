@@ -1,19 +1,13 @@
 import { User } from './models/User';
 
-const user = new User({
-  name: 'Donny',
-  age: 20
-});
+const user = new User({ name: 'New', age: 0 });
 
-user.set({
-  name: 'Shane',
-})
+// user.save();
+// user.fetch();
 
-console.log(user.get('age'));
-console.log(user.get('name'));
-
-user.on('click', () => console.log('CLICK CALLBACK'));
-user.on('hover', () => console.log('HOVER CALLBACK'));
-user.on('click', () => console.log('CLICK CALLBACK'));
-
-user.trigger('hover');
+// setTimeout(() => {
+//   user.set({
+//     name: 'Shanesss'
+//   });
+//   user.save();
+// }, 2000);
