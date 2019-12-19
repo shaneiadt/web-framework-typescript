@@ -11,3 +11,9 @@ user.set({
 
 console.log(user.get('age'));
 console.log(user.get('name'));
+
+user.on('click', () => console.log('CLICK CALLBACK'));
+user.on('hover', () => console.log('HOVER CALLBACK'));
+user.on('click', () => console.log('CLICK CALLBACK'));
+
+user.trigger('hover');
