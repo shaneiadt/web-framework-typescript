@@ -1,17 +1,5 @@
 import { User } from './models/User';
 
-const user = new User({ name: 'New', age: 0 });
+const user = new User({ name: 'Johnny', age: 55 });
 
-user.events.on('click', () => console.log('BOOM'));
-
-user.events.trigger('click');
-
-// user.save();
-// user.fetch();
-
-// setTimeout(() => {
-//   user.set({
-//     name: 'Shanesss'
-//   });
-//   user.save();
-// }, 2000);
+user.on('click', () => console.log('Click callback'));
