@@ -2,4 +2,9 @@ import { User } from './models/User';
 
 const user = new User({ name: 'Johnny', age: 55 });
 
-user.on('click', () => console.log('Click callback'));
+console.log(user.get('name'));
+
+user.on('change', () => console.log('user was changed'));
+
+user.trigger('change');
+// user.on('click', () => console.log('Click callback'));
