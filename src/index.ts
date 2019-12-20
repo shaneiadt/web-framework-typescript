@@ -1,13 +1,13 @@
 import { User } from './models/User';
 
-const user = new User({ name: 'Johnny', age: 55 });
+const user = new User({ id: 1 });
+// console.log(user.get('name'));
 
-console.log(user.get('name'));
+user.on('change', () => console.log(user));
 
-user.on('change', () => console.log('user was changed - callback'));
+user.fetch();
+// user.set({ name: 'Pauly D' });
 
-user.set({ name: 'Pauly D' });
-
-console.log(user.get('name'));
+// console.log(user.get('name'));
 // user.trigger('change');
 // user.on('click', () => console.log('Click callback'));
