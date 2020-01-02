@@ -36,7 +36,7 @@ export class Model<T extends HasId> {
   }
 
   fetch(): void {
-    const id = this.attributes.get('id');
+    const id: number | undefined = this.attributes.get('id');
 
     if (!id) throw new Error('Cannot fetch without an id');
 
