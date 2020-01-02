@@ -1,5 +1,11 @@
 export class UserForm {
-  parent: Element;
+  constructor(public parent: Element) { }
+
+  eventsMaps(): { [key: string]: () => void } {
+    return {
+      'click:button': this.onButtonClick()
+    };
+  }
 
   template(): string {
     return `
