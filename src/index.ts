@@ -1,12 +1,21 @@
-import { User } from './models/User';
+import { Collection } from './models/Collection';
 
-const user = User.build({ id: 1, name: 'Newer Name', age: 0 });
-console.log(user.get('name'));
+const collection = new Collection('http://localhost:3000/users');
+
+collection.on('change', () => {
+  console.log(collection);
+});
+
+collection.fetch();
+// import { User } from './models/User';
+
+// const user = User.build({ id: 1, name: 'Newer Name', age: 0 });
+// console.log(user.get('name'));
 
 
-user.on('save', () => console.log(user));
-user.set({ name: 'Pauly D' });
-user.save();
+// user.on('save', () => console.log(user));
+// user.set({ name: 'Pauly D' });
+// user.save();
 
 // console.log(user.get('name'));
 // user.trigger('change');
