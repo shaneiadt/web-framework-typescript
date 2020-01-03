@@ -53,8 +53,8 @@ export abstract class View<T extends Model<K>, K> {
 
   onRender(): void { }
 
-  render = (): void => {
-    this.parent.innerHTML = '';
+  render = (isParentEmpty: boolean = true): void => {
+    if (isParentEmpty) this.parent.innerHTML = '';
     const templateElement: HTMLTemplateElement = document.createElement('template');
     templateElement.innerHTML = this.template();
 
