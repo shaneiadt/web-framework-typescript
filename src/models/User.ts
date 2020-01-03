@@ -9,10 +9,8 @@ export interface UserProps {
   name?: string;
   age?: number;
 }
-
-const rootUrl = 'http://localhost:3000/users';
 export class User extends Model<UserProps> {
-  static async buildUser(attrs: UserProps): Promise<User> {
+  static async buildUser(attrs: UserProps, rootUrl: string): Promise<User> {
     const { id } = attrs;
     const apiSync = new ApiSync<UserProps>(rootUrl);
 
@@ -34,8 +32,8 @@ export class User extends Model<UserProps> {
 
   }
 
-  static async buildCollection(): Promise<Collection<User, UserProps>> {
-    return new Collection<User, UserProps>(rootUrl, (json: UserProps) => User.buildUser(json));
+  static async buildCollection(rootUrl: string): Promise<Collection<User, UserProps>> {
+    return new Collection<User, UserProps>(rootUrl, (json: UserProps) => User.buildUser(json, rootUrl));
   }
 
   isAdminUser(): boolean {
