@@ -12,6 +12,9 @@ export abstract class View<T extends Model<K>, K> {
     this.model.on('change', () => {
       this.render();
     });
+    this.model.on('save', () => {
+      this.render();
+    });
   }
 
   bindEvents(fragment: DocumentFragment): void {
@@ -26,7 +29,7 @@ export abstract class View<T extends Model<K>, K> {
     }
   }
 
-  render(): void {
+  render = (): void => {
     this.parent.innerHTML = '';
     const templateElement: HTMLTemplateElement = document.createElement('template');
     templateElement.innerHTML = this.template();

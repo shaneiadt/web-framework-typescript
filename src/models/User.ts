@@ -12,15 +12,29 @@ export interface UserProps {
 
 const rootUrl = 'http://localhost:3000/users';
 export class User extends Model<UserProps> {
-  static buildUser(attrs: UserProps): User {
+  static async buildUser(attrs: UserProps): Promise<User> {
+    const { id } = attrs;
+    const apiSync = new ApiSync<UserProps>(rootUrl);
+
+    if (!id) {
+      return new User(
+        new Attributes<UserProps>(attrs),
+        new Eventing(),
+        apiSync
+      );
+    }
+
+    const { data } = await apiSync.fetch(id);
+
     return new User(
-      new Attributes<UserProps>(attrs),
+      new Attributes<UserProps>(data),
       new Eventing(),
       new ApiSync<UserProps>(rootUrl)
     );
+
   }
 
-  static buildCollection(): Collection<User, UserProps> {
+  static async buildCollection(): Promise<Collection<User, UserProps>> {
     return new Collection<User, UserProps>(rootUrl, (json: UserProps) => User.buildUser(json));
   }
 

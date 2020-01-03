@@ -5,22 +5,27 @@ export class UserForm extends View<User, UserProps> {
 
   eventsMap(): { [key: string]: () => void } {
     return {
-      'click:.randomAge': this.onSetAgeClick,
+      'click:.set-age': this.onSetAgeClick,
       'click:.set-name': this.onSetNameClick,
+      'click:.save-model': this.onSaveModelClick,
     };
   }
 
-  template(): string {
+  template = (): string => {
+    console.log('model', this.model);
+    console.log(this.model.get('age'))
     return `
       <div>
-        <h1>User Form</h1>
-        <div>User name: ${this.model.get('name')}</div>
-        <div>User age: ${this.model.get('age')}</div>
-        <input id="user-name" value="${this.model.get('name')}" />
+        <input id="user-name" placeholder="${this.model.get('name')}" />
         <button class="set-name">Change name</button>
-        <button class="randomAge">Set random age</button>
+        <button class="set-age">Set random age</button>
+        <button class="save-model">Save</button>
       </div>
     `;
+  }
+
+  onSaveModelClick = (): void => {
+    this.model.save();
   }
 
   onSetAgeClick = (): void => {

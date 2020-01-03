@@ -7,7 +7,7 @@ export class Collection<T, K> {
 
   constructor(
     private rootUrl: string,
-    public deserialize: (json: K) => T) { }
+    public deserialize: (json: K) => Promise<T>) { }
 
   get on() {
     return this.events.on;
@@ -20,10 +20,10 @@ export class Collection<T, K> {
   fetch(): void {
     axios.get(this.rootUrl)
       .then((response: AxiosResponse) => {
-        response.data.forEach((value: K) => {
-          this.models.push(this.deserialize(value));
-        });
-        this.events.trigger('change');
+        const promises: Promise<T>[] = response.data.map(async (value: K) => this.models.push(await this.deserialize(value)));
+
+        Promise.all(promises)
+          .then(() => this.events.trigger('change'));
       });
   }
 }

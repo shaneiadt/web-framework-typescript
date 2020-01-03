@@ -1,4 +1,5 @@
 {
+  "browserslist": ["Chrome 78"],
   "scripts": {
     "start:dev:db": "json-server -w db.json",
     "start:dev:parcel": "parcel index.html",
