@@ -4,7 +4,7 @@ Bare bones of a web framework similar to React / VueJs built using TypeScript & 
 
 ### Local Usage
 
-Local server is json-server :smile:
+Local server is json-server
 
 ```
 npm start
